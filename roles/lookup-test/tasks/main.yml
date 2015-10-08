@@ -1,7 +1,21 @@
 ---
 
+- name: Register the output
+  set_fact:
+    debug_variable: '{{ lookup("template", "lookup/variable.j2") }}'
+
+- name: Show the output
+  debug: var=debug_variable
+
 - name: Display the list
   debug:
     msg: '{{ item }}'
   with_items: '{{ lookup("template", "lookup/variable.j2") | from_yaml }}'
+  ignore_errors: True
+
+- name: Display the static list
+  debug:
+    msg: '{{ item }}'
+  with_items: '{{ lookup("template", "lookup/variable_static.j2") | from_yaml }}'
+  ignore_errors: True
 
