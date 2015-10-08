@@ -1,0 +1,7 @@
+---
+
+- name: Display the list
+  debug:
+    msg: '{{ item }}'
+  with_items: '{{ lookup("template", "lookup/variable.j2") | from_yaml }}'
+
